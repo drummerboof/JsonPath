@@ -60,7 +60,7 @@ class JsonStoreTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->jsonStore->toArray(), json_decode($this->json, true));
 
-        $new = ['a' => 'b'];
+        $new = array('a' => 'b');
         $this->jsonStore->setData($new);
 
         $this->assertEquals($this->jsonStore->toArray(), $new);
@@ -70,7 +70,7 @@ class JsonStoreTest extends \PHPUnit_Framework_TestCase
     public function testGetAllByKey()
     {
         $data = $this->jsonStore->get("$..book.*.category");
-        $expected = ["reference", "fiction", "fiction", "fiction"];
+        $expected = array("reference", "fiction", "fiction", "fiction");
         $this->assertEquals($data, $expected);
 
         $data = $this->jsonStore->get("$..category");
@@ -80,7 +80,7 @@ class JsonStoreTest extends \PHPUnit_Framework_TestCase
     public function testGetAllByKeyUnique()
     {
         $data = $this->jsonStore->get("$..book.*.category", true);
-        $expected = ["reference", "fiction"];
+        $expected = array("reference", "fiction");
         $this->assertEquals($data, $expected);
 
         $data = $this->jsonStore->get("$..category", true);
@@ -90,7 +90,7 @@ class JsonStoreTest extends \PHPUnit_Framework_TestCase
     public function testGetAllByKeyFiltered()
     {
         $data = $this->jsonStore->get("$..book[(@.code=='02.01')].category");
-        $expected = ["fiction", "fiction"];
+        $expected = array("fiction", "fiction");
         $this->assertEquals($data, $expected);
     }
 
